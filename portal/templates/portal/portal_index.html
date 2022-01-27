@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title_tag %}Home{% endblock %}
+{% block jumbotron %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Hello, {{ user.username }}!</h1>
+            <p>You can reserve rooms and check status of rooms in detail.</p>
+        </div>
+    </div>
+{% endblock %}
+{% block main_content %}
+    <div class="row mb-3">
+        <div class="col-md-12 my-2">
+            <h2>Rooms</h2>
+            <div class="row">
+            {% for room in rooms %}
+                <div class="col-md-4">
+                <div class="card mt-2">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ room.name }}</h5>
+                        <p class="card-text">Number of Seats: {{ room.number_of_seats }}</p>
+                        <p class="card-text">Available from:
+                            <span title="{{ room.time_of_availability }}">
+                                {{ room.time_of_availability|naturaltime }}</span></p>
+                        <a href="{% url 'rooms:room_reserve_create' room.id %}" class="card-link">
+                            Reserve</a>
+                        <a href="{% url 'rooms:room_detail' room.id %}" class="card-link">
+                            Detail</a>
+                    </div>
+                </div>
+                </div>
+            {% empty %}
+                <p>There is no available room at the moment</p>
+            {% endfor %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

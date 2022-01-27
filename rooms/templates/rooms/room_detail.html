@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load humanize custom_tags %}
+{% block title_tag %}Room Detail{% endblock %}
+{% block jumbotron %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">{{ room.name }} Detail!</h1>
+            <p>You can check reserves and edit your reservations.</p>
+            <p>You can edit your reservation before stating of reservation.</p>
+            <p>Admin can cancel reservations anytime.</p>
+        </div>
+    </div>
+{% endblock %}
+{% block main_content %}
+    <div class="row mb-3">
+        <div class="col-md-12 my-2">
+            <h2>{{ room.name }}</h2>
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <caption>List of reserves</caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                        <th scope="col">Reserver</th>
+                        <th scope="col">actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for reserve in room.reserve_set.all %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ reserve.reserve_from }}</td>
+                        <td>{{ reserve.reserve_to }}</td>
+                        <td>{{ reserve.reserved_by }}</td>
+                        <td>
+                            {% if reserve.id|can_edit:user %}
+                                <a href="{% url 'rooms:room_reserve_edit' reserve.id %}"
+                                   class="btn btn-sm btn-primary d-inline-block mb-1">edit</a>
+                            {% endif %}
+                            {% if user|can_cancel %}
+                                <a href="{% url 'rooms:room_reserve_cancel' reserve.room.id reserve.id %}"
+                                   class="btn btn-sm btn-danger d-inline-block mb-1">cancel</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+
+        <div class="col-md-12">
+        <a href="{% url 'rooms:room_reserve_create' room.id %}"
+           class="btn btn-primary d-inline-block">Reserve</a>
+            <a href="{% url 'portal:portal_index' %}"
+               class="btn btn-danger d-inline-block">Back</a>
+        </div>
+
+    </div>
+{% endblock %}

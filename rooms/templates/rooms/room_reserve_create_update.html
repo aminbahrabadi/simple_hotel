@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters static %}
+{% block title_tag %}Room Reserve{% endblock %}
+{% block jumbotron %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">{{ room.name }} Reservation!</h1>
+            <p>You can reserve {{ room.name }}.</p>
+        </div>
+    </div>
+{% endblock %}
+{% block main_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post">
+                {% csrf_token %}
+                {{ form | crispy }}
+
+                <button type="submit" class="btn btn-primary d-inline-block">
+                    {% if reserve %}
+                        Update
+                    {% else %}
+                        Create
+                    {% endif %}
+                </button>
+                {% if reserve %}
+                <a href="{% url 'rooms:room_detail' reserve.room.id %}"
+                   class="btn btn-danger d-inline-block">Back</a>
+            {% else %}
+                    <a href="{% url 'rooms:room_detail' room_id %}"
+                       class="btn btn-danger d-inline-block">Back</a>
+            {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/moment.min.js' %}"></script>
+    <link href="{% static 'css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+    <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"> </script>
+    <script>
+        $('#id_reserve_from').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
+
+        $('#id_reserve_to').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
+    </script>
+{% endblock %}
