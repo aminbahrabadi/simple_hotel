@@ -1,6 +1,6 @@
 # Room Reservation / API
 ## Live demo
-You can test live demo here: [Room Reservation / API](https://ResRoom.ir)
+You can test live demo here: [Room Reservation / API](https://RoomRes.ir)
 ### Default user:
 username: admin
 password: adminadmin
@@ -30,7 +30,7 @@ API links are as follow:
 <br />Before using each end-point, you should get a token by using this URL.
 <br />URL: ```/api/token/```
 ### Create User (POST request):
-<br />URL: ```create-user/```
+<br />URL: ```/api/create-user/```
 <br />Data load sample: ```{
    "username":"api_test_1",
    "email":"api_test_1@gmail.com",
@@ -42,3 +42,40 @@ API links are as follow:
       "Room User"
    ]
 }```
+### List of Rooms (GET request):
+<br />URL: ```/api/rooms/list/```
+### Create Room (POST request):
+<br />URL: ```/api/rooms/create/```
+<br />Data load sample: ```{
+   "name":"api_room_1",
+   "number_of_seats":20,
+   "time_of_availability":"2022-01-30T17:30:00+03:30"
+}```
+### Create Room Reserve (POST request):
+<br />URL: ```/api/reserve/create/```
+<br />Data load sample: ```{
+   "room_id":10,
+   "reserve_from":"2022-01-30T15:30:00+03:30",
+   "reserve_to":"2022-01-30T17:30:00+03:30"
+}```
+### List of reserves (POST request):
+<br />URL: ```/api/reserve/list/```
+<br />Data load sample: ```{
+   "room_id":7,
+   "reserve_from":"2022-01-30T15:30:00+03:30",
+   "reserve_to":"2022-01-30T17:30:00+03:30"
+}```
+### Update room reserve (POST request):
+<br />URL: ```/api/reserve/update/```
+<br />Data load sample: ```{
+   "reserve_id":19,
+   "reserve_from":"2022-01-30T15:30:00+03:30",
+   "reserve_to":"2022-01-30T17:30:00+03:30"
+}```
+
+### Cancel room reserve (POST request):
+<br />URL: ```/api/reserve/cancel/```
+<br />Data load sample: ```{
+   "reserve_id":19
+}```
+
