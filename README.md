@@ -2,13 +2,13 @@
 ## Live demo
 You can test live demo here: [Room Reservation / API](https://RoomRes.ir)
 ### Users:
-room_user:
+<br />room_user:
 username: test_1
 password: adminadmin
-room manager:
+<br />room manager:
 username: test_2
 password: adminadmin
-admin, room manager and room user:
+<br />admin, room manager and room user:
 username: test_3
 password: adminadmin
 ## How to run
