@@ -1,8 +1,15 @@
 # Room Reservation / API
 ## Live demo
 You can test live demo here: [Room Reservation / API](https://RoomRes.ir)
-### Default user:
-username: admin
+### Users:
+room_user:
+username: test_1
+password: adminadmin
+room manager:
+username: test_2
+password: adminadmin
+admin, room manager and room user:
+username: test_3
 password: adminadmin
 ## How to run
 1. Clone the project
