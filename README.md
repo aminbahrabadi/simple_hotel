@@ -61,9 +61,7 @@ API links are as follow:
 ### List of reserves (POST request):
 <br />URL: ```/api/reserve/list/```
 <br />Data load sample: ```{
-   "room_id":7,
-   "reserve_from":"2022-01-30T15:30:00+03:30",
-   "reserve_to":"2022-01-30T17:30:00+03:30"
+   "room_id":7
 }```
 ### Update room reserve (POST request):
 <br />URL: ```/api/reserve/update/```
