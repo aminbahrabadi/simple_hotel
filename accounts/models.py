@@ -23,13 +23,6 @@ class Profile(models.Model):
                                 related_name='profile')
     roles = models.ManyToManyField(Role, blank=True, verbose_name='Roles')
 
-    def save(self, *args, **kwargs):
-        if self.user.is_superuser:
-            admin_role, _ = Role.objects.get_or_create(name=roles.get('admin'))
-            self.roles.add(admin_role)
-
-        return super(Profile, self).save(*args, **kwargs)
-
     def __str__(self):
         return self.user.username
 
